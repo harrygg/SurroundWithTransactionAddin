@@ -1,0 +1,22 @@
+﻿<AddIn name = "SurroundWithTransactionAddin"
+       author = "Hristo Genev"
+       description = "Adds 'Surround with Transaction' option to context menu">
+  <Runtime>
+    <Import assembly = "SurroundWithTransactionAddin.dll">
+      <ConditionEvaluator name="IsValidProtocol" class="SurroundWithTransactionAddin.IsValidCondition"/>
+    </Import>
+  </Runtime>
+
+  <Manifest>
+    <Identity name="SurroundWithTransactionAddin" version = "0.0.1.0" />
+  </Manifest>
+
+  <Path name = "/SharpDevelop/ViewContent/TextEditor/ContextMenu">
+    <Condition name="IsValidProtocol" action="Disable">
+      <MenuItem id="SurroundWithView" insertafter="GoToLine" insertbefore="InsertSeparator"
+              label = "Surround with Transaction"
+              class = "SurroundWithTransactionAddin.SurroundWithTransactionCommand"/>
+    </Condition>
+  </Path>
+
+</AddIn>
