@@ -16,33 +16,37 @@ using HP.LR.Vugen.Common;
 using HP.LR.VuGen.Snapshots.WebSnapshotBrowserControl.Interfaces;
 using HP.LR.VuGen.Snapshots.WebSnapshotBrowserControl.ViewEditors;
 
+using HP.LR.VuGen.ServiceCore.Data.ProjectSystem;
+using HP.LR.VuGen.ServiceCore.Data.Protocol;
+using System.Collections.ObjectModel;
+
 namespace SurroundWithTransactionAddin
 {
     public class SurroundWithTransactionCommand : UttBaseWpfCommand
     {
         /// <summary>
-        /// Check if we are editing a C based script
+        /// Check if we are not editing a TruClient | Java | VB | COM based script
         /// </summary>
         /// <returns></returns>
         public static bool IsValidProtocol()
         {
-            ITextEditor editor = UttCodeEditor.GetActiveTextEditor();
-            if (editor == null)
-                return false;
+            IVuGenProjectService projectService = (IVuGenProjectService)ServiceManager.Instance.GetService(typeof(IVuGenProjectService));
+            IVuGenScript script = projectService.GetActiveScript();
 
-            string filename = editor.FileName;
-            //we don't want the menu on none C protocols including TruClient
-            if (!filename.EndsWith(".c") || filename.EndsWith("Script-View.c"))
+            if (script == null 
+                || script.Protocols.ToString().Contains("TruClient") 
+                || script.Protocols.ToString().Contains("Java")
+                || script.Protocols.ToString().Contains("VB")
+                || script.Protocols.ToString().Contains("COM")
+                )
                 return false;
-
+            
             return true;
         }
 
 
         public override void Run()
         {
-            //if (!(Owner is ISelectableEditor))
-            //    return;
             try
             {
 
