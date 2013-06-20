@@ -13,7 +13,7 @@ using System.Windows.Markup;
 using System.Diagnostics;
 namespace SurroundWithTransactionAddin
 {
-    public class EnterTransactionDetailsContent : UserControl, IComponentConnector
+    public partial class EnterTransactionDetailsContent : UserControl, IComponentConnector
     {
         internal TextBox tName;
         internal ComboBox tStatus;
@@ -32,8 +32,8 @@ namespace SurroundWithTransactionAddin
             if (this._contentLoaded)
                 return;
             this._contentLoaded = true;
-            Uri resourceLocater = new Uri("/SurroundWithTransactionAddin;entertransactiondetailscontent1.xaml", UriKind.Relative);
-            Application.LoadComponent(this, resourceLocater);
+            //Uri resourceLocater = new Uri("/SurroundWithTransactionAddin;entertransactiondetailscontent1.xaml", UriKind.Relative);
+            //Application.LoadComponent(this, resourceLocater);
         }
 
         private void EnterTransactionDetailsContent_Loaded(object sender, RoutedEventArgs e)
