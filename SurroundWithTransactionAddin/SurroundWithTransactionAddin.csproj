@@ -126,6 +126,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnterTransactionDetailsContent.cs" />
+    <Compile Include="EnterTransactionDetailsDialog.cs" />
     <Compile Include="IsValidCondition.cs" />
     <Compile Include="SurroundWithTransactionCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +137,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="entertransactiondetailscontent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

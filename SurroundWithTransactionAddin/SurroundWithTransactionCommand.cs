@@ -19,7 +19,19 @@ using HP.LR.VuGen.Snapshots.WebSnapshotBrowserControl.ViewEditors;
 using HP.LR.VuGen.ServiceCore.Data.ProjectSystem;
 using HP.LR.VuGen.ServiceCore.Data.Protocol;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Markup;
 
+//debuggernonusercode
+using System.Diagnostics;
+
+/*using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Markup;
+*/
 namespace SurroundWithTransactionAddin
 {
     public class SurroundWithTransactionCommand : UttBaseWpfCommand
@@ -81,6 +93,18 @@ namespace SurroundWithTransactionAddin
                     return;
                 }
 
+
+                using (EnterTransactionDetailsDialog dialog = new EnterTransactionDetailsDialog())
+                {
+                    dialog.ShowDialog();
+                    if (dialog.DialogResult == CustomDialogResult.Ok)
+                    {
+                        MessageService.ShowMessage("Added transaction");
+                    
+                    
+                    }
+                }
+                /*
                 //create the lr_end_transaction step
                 var lrEndTransactionFunctionCall = new FunctionCall();
                 var lrEndTransactionSignature = new FunctionCallSignature { Name = "lr_end_transaction" };
@@ -110,7 +134,7 @@ namespace SurroundWithTransactionAddin
                         IStepModel lrStartTransactionStepModel = stepService.GenerateStep(lrStartTransactionFunctionCall);
                         stepService.AddStep(ref lrStartTransactionStepModel, firstSelectedStep, RelativeStep.Before, false);
                     }
-                });
+                });*/
             }
             catch (Exception ex)
             {
