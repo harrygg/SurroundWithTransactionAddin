@@ -5,30 +5,26 @@
  xmlns:System="clr-namespace:System;assembly=mscorlib"
  xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
  x:Class="SurroundWithTransactionAddin.EnterTransactionDetailsContent" 
- MinWidth="500" DataContext="{Binding}">
-    <UserControl.Resources>
-        <System:String x:Key="lineNumberLimitsText">Goto Line (1 - {0}):Goto Line (1 - {0}):</System:String>
-        <System:String x:Key="tooltipLineNumberValidation">
-            Specify a line number between 1 and {0}.Specify a line number between 1 and {0}.</System:String>
-    </UserControl.Resources>
+ MinWidth="500">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="293"/>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="155"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Margin="0,0,10,0">
+        <Label Margin="0,0,10,0" >
             <Run Text="Name"/>
         </Label>
-        
-        <TextBox Name="tName" MinWidth="100" MaxWidth="100" Margin="57,5,67,5" Text="" Grid.Column="1" Height="30" />
-        <Label Grid.Column="3" Margin="0,5,0,-5" HorizontalAlignment="Left" Width="42">
+
+        <TextBox Name="tName" MinWidth="100" Margin="49,5,3,6" Text="{Binding Path=TransactionName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                 TextChanged="tName_TextChanged" Height="29" Width="293" Grid.ColumnSpan="2" />
+        <Label Grid.Column="3" Margin="14,1,0,-1" HorizontalAlignment="Left" Width="42">
             <Run Text="Status"/>
         </Label>
 
-        <ComboBox Name="tStatus" Width="95" Height="30" IsEditable="False" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,4,12,0" Grid.Column="3">
-            <ComboBoxItem Content="LR_AUTO"></ComboBoxItem>
+        <ComboBox Name="tStatus" Width="95" Height="30" IsEditable="False" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,4,5,0" Grid.Column="3">
+            <ComboBoxItem Content="LR_AUTO" IsSelected="True"></ComboBoxItem>
             <ComboBoxItem Content="LR_PASS"></ComboBoxItem>
             <ComboBoxItem Content="LR_FAIL"></ComboBoxItem>
             <ComboBoxItem Content="LR_STOP"></ComboBoxItem>

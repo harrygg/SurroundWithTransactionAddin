@@ -28,22 +28,30 @@ namespace SurroundWithTransactionAddin
 {
     public class EnterTransactionDetailsDialog : CustomDialog
     {
-        //private EnterTransactionDetailsViewModel _viewModel;
+        private EnterTransactionDetailsViewModel _viewModel;
+        //private String transactionName;
+        public String TransactionName {
+            get { return this._viewModel.TransactionName; }
+            private set { this._viewModel.TransactionName = value;}
+        }
+        //public String tStatus = String.Empty;
+
         public EnterTransactionDetailsDialog()
         {
+            base.Title = "Enter Transaction Details";
             base.ResizeMode = ResizeMode.NoResize;
-            base.ShowHelpButton = false;
-            base.Content = null;
-            this.AddCancelButton();
+            this.ShowHelpButton = false;
+            EnterTransactionDetailsContent content = new EnterTransactionDetailsContent();
+            content.DataContext = _viewModel;
+            base.Content = content;
             this.AddOkButton(new Action<CustomDialog>(this.OkAction));
-
+            this.AddCancelButton();
         }
 
         private void OkAction(CustomDialog dialog)
         {
-            base.DialogResult = CustomDialogResult.Ok;
-            base.Close();
-
+            this.DialogResult = CustomDialogResult.Ok;
+            this.Close();
         }
     }
 }

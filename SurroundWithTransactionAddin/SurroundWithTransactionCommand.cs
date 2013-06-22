@@ -94,16 +94,17 @@ namespace SurroundWithTransactionAddin
                 }
 
 
-                using (EnterTransactionDetailsDialog dialog = new EnterTransactionDetailsDialog())
-                {
+                //using (EnterTransactionDetailsDialog dialog = new EnterTransactionDetailsDialog())
+                //{
+                EnterTransactionDetailsDialog dialog = new EnterTransactionDetailsDialog();
                     dialog.ShowDialog();
                     if (dialog.DialogResult == CustomDialogResult.Ok)
                     {
-                        MessageService.ShowMessage("Added transaction");
+                        MessageService.ShowMessage(dialog.TransactionName);
                     
                     
                     }
-                }
+                //}
                 /*
                 //create the lr_end_transaction step
                 var lrEndTransactionFunctionCall = new FunctionCall();
@@ -139,6 +140,7 @@ namespace SurroundWithTransactionAddin
             catch (Exception ex)
             {
                 Log.VuGen.Error(string.Format("Error occurred when adding the {2} step. (Type: '{0}', Exception: '{1}')", Owner.GetType(), ex, Name));
+                MessageService.ShowMessage(string.Format(ex.StackTrace));
             }
         }
 

@@ -128,6 +128,7 @@
   <ItemGroup>
     <Compile Include="EnterTransactionDetailsContent.cs" />
     <Compile Include="EnterTransactionDetailsDialog.cs" />
+    <Compile Include="EnterTransactionDetailsViewModel.cs" />
     <Compile Include="IsValidCondition.cs" />
     <Compile Include="SurroundWithTransactionCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
