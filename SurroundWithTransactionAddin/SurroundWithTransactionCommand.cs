@@ -49,7 +49,7 @@ namespace SurroundWithTransactionAddin
                 || script.Protocols.ToString().Contains("TruClient") 
                 || script.Protocols.ToString().Contains("Java")
                 || script.Protocols.ToString().Contains("VB")
-                || script.Protocols.ToString().Contains("COM")
+                || script.Protocols.ToString().Contains("NET")
                 )
                 return false;
             
@@ -93,49 +93,31 @@ namespace SurroundWithTransactionAddin
                     return;
                 }
 
-
-                //using (EnterTransactionDetailsDialog dialog = new EnterTransactionDetailsDialog())
-                //{
-                EnterTransactionDetailsDialog dialog = new EnterTransactionDetailsDialog();
+                using (EnterTransactionDetailsDialog dialog = new EnterTransactionDetailsDialog())
+                {
                     dialog.ShowDialog();
                     if (dialog.DialogResult == CustomDialogResult.Ok)
                     {
-                        MessageService.ShowMessage(dialog.TransactionName);
-                    
-                    
-                    }
-                //}
-                /*
-                //create the lr_end_transaction step
-                var lrEndTransactionFunctionCall = new FunctionCall();
-                var lrEndTransactionSignature = new FunctionCallSignature { Name = "lr_end_transaction" };
-                lrEndTransactionSignature.Parameters.Add(new FunctionCallParameter("", ParameterType.ArgtypeString));
-                lrEndTransactionSignature.Parameters.Add(new FunctionCallParameter("LR_AUTO", ParameterType.ArgtypeNumber));
-                lrEndTransactionFunctionCall.Signature = lrEndTransactionSignature;
-                lrEndTransactionFunctionCall.Location = new FunctionCallLocation(lastSelectedStep.FunctionCall.Location.FilePath, null, null);
-                IStepModel lrEndTransactionStepModel = stepService.GenerateStep(lrEndTransactionFunctionCall);
-
-                //show the lr_end_transaction dialog
-                //TODO - Change the title of the dialog box. Now it is "End transaction"
-                lrEndTransactionStepModel.ShowArguments(asyncResult =>
-                {
-                    var result = (ShowArgumentsResult)asyncResult.AsyncState;
-                    if (result.IsModified)
-                    {
-                        //set the last parameter to False, so it will not move cursor to the newly added step
-                        stepService.AddStep(ref lrEndTransactionStepModel, lastSelectedStep, RelativeStep.After, false);
                         //create the lr_start_transaction step
                         var lrStartTransactionFunctionCall = new FunctionCall();
                         var lrStartTransactionSignature = new FunctionCallSignature { Name = "lr_start_transaction" };
-
-                        //TODO I didn't find a way YET to get the newly added parameter name. So I use the dirty way substirnging the ComposedName :(
-                        lrStartTransactionSignature.Parameters.Add(new FunctionCallParameter(lrEndTransactionStepModel.ComposedName.Substring(18), ParameterType.ArgtypeString));
+                        lrStartTransactionSignature.Parameters.Add(new FunctionCallParameter(dialog.TransactionName, ParameterType.ArgtypeString));
                         lrStartTransactionFunctionCall.Signature = lrStartTransactionSignature;
                         lrStartTransactionFunctionCall.Location = new FunctionCallLocation(firstSelectedStep.FunctionCall.Location.FilePath, null, null);
                         IStepModel lrStartTransactionStepModel = stepService.GenerateStep(lrStartTransactionFunctionCall);
                         stepService.AddStep(ref lrStartTransactionStepModel, firstSelectedStep, RelativeStep.Before, false);
+
+                        //create the lr_end_transaction step
+                        var lrEndTransactionFunctionCall = new FunctionCall();
+                        var lrEndTransactionSignature = new FunctionCallSignature { Name = "lr_end_transaction" };
+                        lrEndTransactionSignature.Parameters.Add(new FunctionCallParameter(dialog.TransactionName, ParameterType.ArgtypeString));
+                        lrEndTransactionSignature.Parameters.Add(new FunctionCallParameter(dialog.TransactionStatus, ParameterType.ArgtypeNumber));
+                        lrEndTransactionFunctionCall.Signature = lrEndTransactionSignature;
+                        lrEndTransactionFunctionCall.Location = new FunctionCallLocation(lastSelectedStep.FunctionCall.Location.FilePath, null, null);
+                        IStepModel lrEndTransactionStepModel = stepService.GenerateStep(lrEndTransactionFunctionCall);
+                        stepService.AddStep(ref lrEndTransactionStepModel, lastSelectedStep, RelativeStep.After, false);
                     }
-                });*/
+                }
             }
             catch (Exception ex)
             {

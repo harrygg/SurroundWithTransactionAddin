@@ -8,26 +8,26 @@
  MinWidth="500">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="293"/>
-            <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="155"/>
+            <ColumnDefinition Width="44"/>
+            <ColumnDefinition Width="303"/>
+            <ColumnDefinition Width="56"/>
+            <ColumnDefinition Width="99"/>
         </Grid.ColumnDefinitions>
-        <Label Margin="0,0,10,0" >
-            <Run Text="Name"/>
+        
+        <Label Grid.ColumnSpan="2" Margin="1,0,302,0">
+            <Run Text="Name:"/>
         </Label>
 
-        <TextBox Name="tName" MinWidth="100" Margin="49,5,3,6" Text="{Binding Path=TransactionName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                 TextChanged="tName_TextChanged" Height="29" Width="293" Grid.ColumnSpan="2" />
-        <Label Grid.Column="3" Margin="14,1,0,-1" HorizontalAlignment="Left" Width="42">
-            <Run Text="Status"/>
+        <TextBox Name="tName" MinWidth="100" Margin="4,5,6,6" Text="{Binding Path=TransactionName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                 Height="29" Width="293" Grid.Column="1" />
+        
+        <Label Grid.Column="2" Margin="11,0,0,0" HorizontalAlignment="Left" Width="42">
+            <Run Text="Status:"/>
         </Label>
 
-        <ComboBox Name="tStatus" Width="95" Height="30" IsEditable="False" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,4,5,0" Grid.Column="3">
-            <ComboBoxItem Content="LR_AUTO" IsSelected="True"></ComboBoxItem>
-            <ComboBoxItem Content="LR_PASS"></ComboBoxItem>
-            <ComboBoxItem Content="LR_FAIL"></ComboBoxItem>
-            <ComboBoxItem Content="LR_STOP"></ComboBoxItem>
+        <ComboBox Name="tStatus" Width="95" Height="30" IsEditable="False" VerticalAlignment="Top" 
+                  HorizontalAlignment="Right" Margin="0,4,5,0" Grid.Column="2"
+                  ItemsSource="{Binding Path=TransactionStatuses}" DisplayMemberPath="Status" Grid.ColumnSpan="2">
         </ComboBox>
     </Grid>
 </UserControl>

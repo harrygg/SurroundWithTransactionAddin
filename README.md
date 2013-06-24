@@ -1,4 +1,4 @@
-SurroundWithTransactionAddin - NOT WORKING YET!!!
+SurroundWithTransactionAddin
 ============
 
 # Disclaimer
