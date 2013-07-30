@@ -26,12 +26,7 @@ using System.Windows.Markup;
 //debuggernonusercode
 using System.Diagnostics;
 
-/*using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
-using System.Windows.Markup;
-*/
+
 namespace SurroundWithTransactionAddin
 {
     public class SurroundWithTransactionCommand : UttBaseWpfCommand
@@ -55,7 +50,7 @@ namespace SurroundWithTransactionAddin
                 //Find out which are the first and last steps selected for surrounding
                 if (SetSelectedSteps(stepService, editor) == false)
                 {
-                    MessageService.ShowMessage("Please select steps to surround");
+                    MessageService.ShowMessage("Please select steps to surround with a Transaction");
                     return;
                 }
 
@@ -93,16 +88,8 @@ namespace SurroundWithTransactionAddin
             }
             catch (Exception ex)
             {
-                Log.VuGen.Error(string.Format("Error occurred when adding the {2} step. (Type: '{0}', Exception: '{1}')", Owner.GetType(), ex, Name));
+                Log.VuGen.Error(string.Format("Error occurred when adding a transaction step. (Type: '{0}', Exception: '{1}')", Owner.GetType(), ex));
                 MessageService.ShowMessage(string.Format(ex.StackTrace));
-            }
-        }
-
-        protected string Name
-        {
-            get
-            {
-                return "";
             }
         }
 
@@ -112,13 +99,6 @@ namespace SurroundWithTransactionAddin
             {
                 ITextEditor editor = UttCodeEditor.GetActiveTextEditor();
                 var stepService = ServiceManager.Instance.GetService<IStepService>();
-
-                //IVuGenProjectService projectService = (IVuGenProjectService)ServiceManager.Instance.GetService(typeof(IVuGenProjectService));
-                //IVuGenScript script = projectService.GetActiveScript();
-
-                //get only the web_url, web_submit_data, web_submit_form, web_custom_request, web_link
-                //ReadOnlyCollection<IStepModel> steps = stepService.GetScriptSteps(script);
-
 
                 IStepModel currentStep;
                 //Go up the script and find the first lr_start_transaction if there is no lr_end_transaction
@@ -167,12 +147,12 @@ namespace SurroundWithTransactionAddin
 
                     //Check if the line contains a step. If it doesn't move the line down the script
                     //until we find a step or we reach the selection end
-                    firstSelectedStep = FindNearestSelectedStep(lastSelectedLine, false);
+                    firstSelectedStep = GetLastSelectedStep(lastSelectedLine, false);
                     //Move the cursor to the end of selection to find out the end line
                     editor.Caret.Offset = selectionEnd;
                     //Check if the line contains a step. If it doesn't move the line up the script 
                     //until we reach the selection start
-                    lastSelectedStep = FindNearestSelectedStep(firstSelectedLine, true);
+                    lastSelectedStep = GetLastSelectedStep(firstSelectedLine, true);
                 }
 
                 if (firstSelectedStep == null && lastSelectedStep == null)
@@ -189,12 +169,12 @@ namespace SurroundWithTransactionAddin
 
         /// <summary>
         /// Method to find the nearest selected step. It is needed when the selection starts/ends with an empty line that has no step.
-        /// Then depending on the first/last step we'll go down/up the script to search for nearest steps.
+        /// Then depending on the first/last step we'll go down/up the script to search for the last selected step.
         /// </summary>
         /// <param name="line">The line number</param>
         /// <param name="up">The direction of the search</param>
         /// <returns></returns>
-        IStepModel FindNearestSelectedStep(int limitLine, bool up = false)
+        IStepModel GetLastSelectedStep(int limitLine, bool up = false)
         {
             try
             {

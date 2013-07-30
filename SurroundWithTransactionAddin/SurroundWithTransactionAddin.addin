@@ -12,11 +12,16 @@
   </Manifest>
 
   <Path name = "/SharpDevelop/ViewContent/TextEditor/ContextMenu">
-    <Condition name="IsValidCondition" action="Disable">
-      <MenuItem id="SurroundWithView" insertafter="GoToLine" insertbefore="InsertSeparator"
-              label = "Surround with Transaction"
-              class = "SurroundWithTransactionAddin.SurroundWithTransactionCommand"/>
-    </Condition>
-  </Path>
+     <MenuItem id="SWTransactions" label="Transactions" type="Menu" insertafter="GoToLine" insertbefore="InsertSeparator">
+        <Condition name="IsValidCondition" action="Disable">
+          <MenuItem id="SurroundWithView"
+            label = "Surround selected step(s)"
+            class = "SurroundWithTransactionAddin.SurroundWithTransactionCommand" />
+        </Condition>
+        <MenuItem id="SurroundAllWithView"
+          label = "Surround all steps in script"
+          class = "SurroundWithTransactionAddin.SurroundAllWithTransactionsCommand"/>
+      </MenuItem>
 
+  </Path>
 </AddIn>
