@@ -57,6 +57,10 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\HP\LoadRunner\bin\HP.LR.VuGen.Snapshots.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="HP.LR.VuGen.Step, Version=11.50.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\HP\LoadRunner\bin\HP.LR.VuGen.Step.dll</HintPath>
+    </Reference>
     <Reference Include="HP.LR.VuGen.StepData, Version=11.50.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\HP\LoadRunner\bin\HP.LR.VuGen.StepData.dll</HintPath>
@@ -130,6 +134,7 @@
     <Compile Include="EnterTransactionDetailsDialog.cs" />
     <Compile Include="EnterTransactionDetailsViewModel.cs" />
     <Compile Include="IsValidCondition.cs" />
+    <Compile Include="SurroundWithSubTransactionCommand.cs" />
     <Compile Include="SurroundWithTransactionCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionStatus.cs" />
