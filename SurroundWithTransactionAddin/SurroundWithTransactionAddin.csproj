@@ -60,6 +60,7 @@
     <Reference Include="HP.LR.VuGen.Step, Version=11.50.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\HP\LoadRunner\bin\HP.LR.VuGen.Step.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="HP.LR.VuGen.StepData, Version=11.50.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -94,6 +95,11 @@
     <Reference Include="HP.Utt.Logger, Version=11.50.0.0, Culture=neutral, PublicKeyToken=9675578abe362d8d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\HP\LoadRunner\bin\HP.Utt.Logger.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HP.Utt.ProgressDialog, Version=11.50.0.0, Culture=neutral, PublicKeyToken=9675578abe362d8d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\HP\LoadRunner\bin\HP.Utt.ProgressDialog.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HP.Utt.ProjectSystem, Version=11.50.0.0, Culture=neutral, PublicKeyToken=9675578abe362d8d, processorArchitecture=MSIL">
@@ -134,6 +140,7 @@
     <Compile Include="EnterTransactionDetailsDialog.cs" />
     <Compile Include="EnterTransactionDetailsViewModel.cs" />
     <Compile Include="IsValidCondition.cs" />
+    <Compile Include="SurroundAllWithTransactionCommand.cs" />
     <Compile Include="SurroundWithTransactionCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionStatus.cs" />
